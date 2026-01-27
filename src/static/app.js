@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
           <div class="participants-section">
             <strong>Participants:</strong>
-            ${participantsList}
+            ${participantsList.map(p => `<li>${p} <button class='delete-participant' onclick='deleteParticipant("${p}")'>🗑️</button></li>`).join('')}
           </div>
         `;
 
@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
         signupForm.reset();
+        fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
@@ -90,5 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Initialize app
+
+function deleteParticipant(participant) {
+  // Logic to unregister the participant
+  console.log(`Unregistering participant: ${participant}`);
+  // You can add your API call here to unregister the participant
+}
   fetchActivities();
 });
